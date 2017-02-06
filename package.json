@@ -9,7 +9,7 @@
       "@ibma/aat": "https://ecs-dashboard.mybluemix.net/dist/aat.tgz",
       "assert": "^1.3.0",
       "mocha": "^2.4.5",
-      "zombie": "^4.2.1"
+      "zombie": "^2.x"
   },
 	"repository": {},
 	"engines": {
