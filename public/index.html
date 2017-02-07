@@ -2,25 +2,37 @@
 <html>
 
   <head>
-    <title>NodeJS Starter Application</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="stylesheets/style.css">
+    <script src="http://code.angularjs.org/angular-1.0.0rc3.min.js"></script>
+    <link rel="stylesheet" href="stylesheets/style.css" />
+    <script src="scripts/script.js"></script>
   </head>
 
-  <body>
-    <table>
-      <tr>
-        <td style= "width:30%;">
-          <img class = "newappIcon" src="images/newapp-icon.png">
-        </td>
-        <td>
-          <h1 id="message">Hello World!</h1>
-          <p class='description'></p> Thanks for creating a <span class = "blue">NodeJS Starter Application</span>.
-        </td>
-      </tr>
-    </table>
+  <body ng-app="Focuser">
+    <div ng-controller="FocusController">
+      <h1>Hello Plunker!</h1>
+      <p>Angular says: {{test}}</p>
+
+      <section role="main" id="chat-wrapper">
+        <h2>Chat</h2>
+        <section id="chat-messages" aria-live="polite" role="log">
+          <ul>
+            <li ng-repeat="message in messages" ng-bind-html-unsafe="message">{{message}}</li>
+          </ul>
+        </section>
+        <form role="form">
+          <textarea ng-model="inputField" role="input" aria-label="Type your message" aria-description="Navigate to the send button with tab to send, or press enter on the keyboard"></textarea>
+          <button type="button" ng-click="sendMessage()">Send</button>
+        </form>
+      </section>
+      <section role="supportive" id="supportive-content-wrapper">
+        <div id="path">
+          <div aria-label="Stage 1, 2.5 starts">Stage 1</div>
+          <div aria-label="Stage 2, 1 starts">Stage 2</div>
+          <div aria-label="Stage 3, 3.5 starts">Stage 3</div>
+          <div aria-label="Stage 4, 4 starts">Stage 4</div>
+        </div>
+      </section>
+    </div>
   </body>
 
 </html>

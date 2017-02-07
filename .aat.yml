@@ -1,0 +1,19 @@
+rulePack: https://cc-rules.w3ibm.mybluemix.net/js/latest/
+policies:
+    - CI162_5_2_DCP070116
+failLevels:
+    - violation
+    - potentialviolation
+reportLevels:
+    - violation
+    - potentialviolation
+    - recommendation
+    - potentialrecommendation
+    - manual
+outputFormat:
+    - json
+label:
+    - master
+outputFolder: results
+baselineFolder: test/baselines
+checkHiddenContent: false
