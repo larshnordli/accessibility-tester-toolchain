@@ -14,6 +14,7 @@ app.controller("FocusController", function($scope){
 
   $scope.sendMessage = function(){
     var message = $scope.inputField;
+    
     if(message != null){
       messages.push($scope.inputField);
     }
