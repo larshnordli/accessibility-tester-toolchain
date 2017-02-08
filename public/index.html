@@ -2,7 +2,7 @@
 <html>
 
   <head>
-    <script src="http://code.angularjs.org/angular-1.0.0rc3.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.js"></script>
     <link rel="stylesheet" href="stylesheets/style.css" />
     <script src="scripts/script.js"></script>
   </head>
@@ -14,14 +14,14 @@
 
       <section role="main" id="chat-wrapper">
         <h2>Chat</h2>
-        <section id="chat-messages" aria-live="polite" role="log">
+        <section id="chat-messages">
           <ul>
-            <li ng-repeat="message in messages" ng-bind-html-unsafe="message">{{message}}</li>
+            <li aria-live="polite" role="log" ng-repeat="message in messages" ng-bind-html-unsafe="message">{{message}}</li>
           </ul>
         </section>
         <form role="form">
-          <textarea ng-model="inputField" role="input" aria-label="Type your message" aria-description="Navigate to the send button with tab to send, or press enter on the keyboard"></textarea>
-          <button type="button" ng-click="sendMessage()">Send</button>
+          <textarea ng-focus-lost="textArea=false;" ng-focus="textArea" ng-model="inputField" role="input" aria-label="Type your message" aria-description="Navigate to the send button with tab to send, or press enter on the keyboard"></textarea>
+          <button type="button" ng-click="sendMessage()" aria-controls="chat-messages">Send</button>
         </form>
       </section>
       <section role="supportive" id="supportive-content-wrapper">
