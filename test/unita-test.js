@@ -1,46 +1,30 @@
-var assert = require('assert'),
-            fs = require("fs"),
+// Load dependencies
+        var assert = require('assert'),
+            zombie = require("zombie"),
             aatConfig = require("../dashboard-config.json"),
-            options = {
-                "policies": ["IBM_DCP080115"]
-            };
+            aat = require("@ibma/aat")(aatConfig, { "policies" : ["IBM_DCP080115"]}),
+            browser = aat.Zombie(new zombie());
 
-        var webdriver = require('selenium-webdriver'),
-            SeleniumServer = require('selenium-webdriver/remote').SeleniumServer,
-            By = require('selenium-webdriver').By,
-            until = require('selenium-webdriver').until;
-
-        var pathToSeleniumServer = "/Users/lars.henrik.nordli/sdk/selenium/selenium-server-standalone-3.0.1.jar"
-        var server = new SeleniumServer(pathToSeleniumServer, {
-        port: 4444,
-        jvmArgs: [
-            "-Dwebdriver.chrome.driver=chromedriver"
-        ]
-        });
-
-        server.start();
-
-        var seleniumDriver = new webdriver.Builder().
-            usingServer(server.address()).
-            withCapabilities(webdriver.Capabilities.chrome()).
-            build();
-
-
-        var aat = require("@ibma/aat");//(aatConfig, { "policies" : ["IBM_DCP080115"]});
-        aat.DEBUG = true;
-        aat.Config.policies.push("IBM_DCP080115");
-        console.log("**AAT:**\r\n",aat);
-
-        var browser = aat.Selenium(seleniumDriver);
-
-        describe("Home Page", function() {
+        // Describe unit tests for the home page
+        describe("Visit Home Page", function() {
+            // Before running tests, visit the homepage
             before(function(done) {
-                this.timeout(0);
-                browser.get("http://myapp.mybluemix.net")
-                    .then(function() { done() });
+              this.timeout(5000);
+
+                browser.visit("http://accessibility-tester.mybluemix.net", function() {
+                    done();
+                });
             })
 
+            // Test that the page loaded successfully
+            it("Loaded", function() {
+                browser.assert.success();
+            });
+
+            // Tests to ensure no accessibility violations
             it("Has no accessibility violations", function(done) {
+                // Scan may take longer than the default timeout
+                // Disable timeout
                 this.timeout(0);
                 browser.getCompliance().then(function(data) {
                     try {
@@ -54,7 +38,4 @@ var assert = require('assert'),
                     }
                 });
             });
-            after(function() {
-                browser.quit();
-            })
         });
