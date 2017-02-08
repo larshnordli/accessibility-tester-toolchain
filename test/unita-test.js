@@ -9,6 +9,7 @@
         describe("Visit Home Page", function() {
             // Before running tests, visit the homepage
             before(function(done) {
+              
               this.timeout(5000);
 
                 browser.visit("http://accessibility-tester.mybluemix.net", function() {
